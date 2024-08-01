@@ -23,9 +23,12 @@ console.log(kmElement);
 const ageElement = document.getElementById('age');
 console.log(ageElement);
 
-const button = document.querySelector('button')
-// Preparo gli elementi conosciuti
+const button = document.querySelector('button');
+console.log(button);
 
+const resultElement = document.getElementById('result')
+console.log(resultElement);
+// Preparo gli elementi conosciuti
 const discountFirst = 20;
 console.log('discountFirst',  discountFirst);
 
@@ -34,8 +37,13 @@ console.log('discountSecond', discountSecond);
 
 /* Fase di gestione eventi */
 let km;
+let priceToKm;
+let  price;
+let discountMinor;
+let discountMajor;
 
 button.addEventListener ('click', function () {
+    /* Fase di raccolta dati */
     // Recupero il valore dell'input del nome e cognome
     const fullname = fullnameElement.value.trim();
     console.log('fullname', fullname);
@@ -48,17 +56,22 @@ button.addEventListener ('click', function () {
     const age = ageElement.value;
     console.log('age', age);
     
+    /* Fase Lavorazione dei dati */
     //Calcolo il prezzo al km
-    const priceToKm = parseInt(0.21 * km).toFixed(2); 
+    priceToKm = parseInt(0.21 * km).toFixed(2); 
     console.log('priceToKm', priceToKm);
+    
     //Calcolo lo sconto minori
-    const discountMinor = priceToKm - ((discountFirst * priceToKm)  /  100);
+    discountMinor = priceToKm - ((discountFirst * priceToKm)  /  100);
     console.log('discountMinor', discountMinor);
+    
     //Calcolo lo sconto over-65
-    const discountMajor = priceToKm - ((discountSecond * priceToKm)  /  100);
+    discountMajor = priceToKm - ((discountSecond * priceToKm)  /  100);
     console.log('discountMajor', discountMajor);
+    
     //Dichiaro la variabile price
-    let  price = priceToKm;
+    price = priceToKm
+    
     //Applico gli sconti in base alla scelta dell'utente
     if (age === 3) {
         price = discountMajor;
@@ -68,8 +81,5 @@ button.addEventListener ('click', function () {
     console.log('price', price);
 })
 
-/* Fase di raccolta dei dati */
-
-
-
-/* Fase Lavorazione dei dati */
+/* Fase di output */
+resultElement.innerText = price
