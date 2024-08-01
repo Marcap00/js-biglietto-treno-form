@@ -10,6 +10,39 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="container">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <h1 class="text-center">CALCOLA IL PREZZO DEL TUO BIGLIETTO</h1>
+                    <div class="card p-2">
+                        <form class="row row-cols-3">
+                            <div class="col">
+                                <h6 class="text-center">Nome e cognome</h6>
+                                <input type="text" class="form-control" id="first-lastname">
+                            </div>
+                            <div class="col">
+                                <h6 class="text-center">Km da percorrere</h6>
+                                <input type="number" class="form-control" id="km-to-ride" min="1">
+                            </div>
+                            <div class="col">
+                                <h6 class="text-center">Fascia d'età</h6>
+                                <select  class="form-select" id="age">
+                                    <option selected>Fascia d'età</option>
+                                    <option value="1">Minorenne</option>
+                                    <option value="2">Maggiorenne</option>
+                                    <option value="3">Over-65</option>    
+                                </select>
+                            </div>
+                            <div class="col-12 text-center py-3">
+                                <button type="button" class="btn btn-secondary">Genera</button>
+                                <button type="reset" class="btn btn-secondary">Annulla</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
         
 
 
