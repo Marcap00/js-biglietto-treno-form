@@ -68,6 +68,14 @@ button.addEventListener ('click', function () {
     //Recupero il valore dell'età
     const age = ageElement.value;
     console.log('age', age);
+
+    // ! VALIDAZIONE 
+    const isFullnameInvalid = !fullname;
+    const isKmInvalid = isNaN(km) || km < 15 || km > 500;
+    if (isFullnameInvalid || isKmInvalid) {
+        alert('Non hai compilato bene i campi');
+        return;
+    }
     
     /* Fase Lavorazione dei dati */
     //Calcolo il prezzo al km
