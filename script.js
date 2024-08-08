@@ -14,8 +14,12 @@
 
 /* Fase preparatoria */
 //Recupero gli elementi in pagina
-const fullnameElement = document.getElementById('full-name');
-console.log(fullnameElement);
+// FORM ELEMENTS
+const form = document.querySelector('form');
+console.log(form);
+
+const fullnameField = document.getElementById('full-name');
+console.log(fullnameField);
 
 const kmElement = document.getElementById('km-to-ride');
 console.log(kmElement);
@@ -26,8 +30,22 @@ console.log(ageElement);
 const button = document.querySelector('button');
 console.log(button);
 
-const resultElement = document.getElementById('result')
+// TICKET ELEMENTS
+const fullnameElement = document.getElementById('result-fullname');
+console.log(fullnameElement);
+
+const offer = document.getElementById('offer');
+console.log(offer);
+
+const carElement = document.getElementById('car');
+console.log(car);
+
+const codeCPElement = document.getElementById('cp-code');
+console.log(codeCPElement);
+
+const resultElement = document.getElementById('result-price');
 console.log(resultElement);
+
 // Preparo gli elementi conosciuti
 const discountFirst = 20;
 console.log('discountFirst',  discountFirst);
@@ -36,20 +54,15 @@ const discountSecond = 40;
 console.log('discountSecond', discountSecond);
 
 /* Fase di gestione eventi */
-let km;
-let priceToKm;
-let  price;
-let discountMinor;
-let discountMajor;
 
 button.addEventListener ('click', function () {
     /* Fase di raccolta dati */
     // Recupero il valore dell'input del nome e cognome
-    const fullname = fullnameElement.value.trim();
+    const fullname = fullnameField.value.trim();
     console.log('fullname', fullname);
 
     //Recupero il valore dei km
-    km = kmElement.value;
+    const km = parseInt(kmElement.value);
     console.log('km', km);
 
     //Recupero il valore dell'età
@@ -58,28 +71,48 @@ button.addEventListener ('click', function () {
     
     /* Fase Lavorazione dei dati */
     //Calcolo il prezzo al km
-    priceToKm = parseInt(0.21 * km).toFixed(2); 
+    const priceToKm = parseInt((0.21 * km)); 
     console.log('priceToKm', priceToKm);
     
     //Calcolo lo sconto minori
-    discountMinor = priceToKm - ((discountFirst * priceToKm)  /  100);
+    const discountMinor = priceToKm - ((discountFirst * priceToKm)  /  100);
     console.log('discountMinor', discountMinor);
     
     //Calcolo lo sconto over-65
-    discountMajor = priceToKm - ((discountSecond * priceToKm)  /  100);
+    const discountMajor = priceToKm - ((discountSecond * priceToKm)  /  100);
     console.log('discountMajor', discountMajor);
     
     //Dichiaro la variabile price
-    price = priceToKm
-    
-    //Applico gli sconti in base alla scelta dell'utente
-    if (age === 3) {
-        price = discountMajor;
-    } else if (age === 1) {
-        price = discountMinor;
-    }
+    let price = parseInt(priceToKm);
     console.log('price', price);
-})
+    
+    /* Fase di output del prezzo */
+    resultElement.innerText = '€ ' + price.toFixed(2);
 
-/* Fase di output */
-resultElement.innerText = price
+    //Applico gli sconti in base alla scelta dell'utente
+    if (age == 3) {
+        price = discountMajor;
+        resultElement.innerText = '€ ' + price.toFixed(2);
+        offer.innerText = 'Senior';
+        
+    } else if (age == 1) {
+        price = discountMajor;
+        resultElement.innerText = '€ ' + price.toFixed(2);
+        offer.innerText = 'Junior';
+    }
+
+    // Genero un numero di carrozza
+    const car = Math.floor(Math.random() * 9) + 1;
+
+    // Genero un codice CP 
+    const codeCP = Math.floor(Math.random() * (100000 - 90000)) + 90000;
+
+    /* Fase di output degli elementi nel biglietto */
+    fullnameElement.innerText = fullname;
+    offer.innerText = 'Standard';
+    carElement.innerText = car;
+    codeCPElement.innerText = codeCP;
+
+    // Reset del form
+    form.reset();
+})
